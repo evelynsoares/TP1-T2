@@ -1,0 +1,131 @@
+# depslib dependency file v1.0
+1733519959 source:c:\users\victo\downloads\tp1-trabalho-1\tp1\main.cpp
+	<iostream>
+	"dominios.hpp"
+	"entidades.hpp"
+
+1733710158 .hpp"
+
+1733522275 c:\users\victo\downloads\tp1-trabalho-1\tp1\dominios.hpp
+	<cstdint>
+	<stdexcept>
+	<cstring>
+	<iostream>
+
+1733522275 
+
+1733597736 c:\users\victo\downloads\tp1-trabalho-1\tp1\entidades.hpp
+	<string>
+	"dominios.hpp"
+
+1733708907 hpp"
+
+1733522281 source:c:\users\victo\downloads\tp1-trabalho-1\tp1\dominios.cpp
+	"dominios.hpp"
+	<set>
+
+1733593416 source:c:\users\victo\downloads\tp1-trabalho-1\tp1\entidades.cpp
+	"entidades.hpp"
+
+1733616460 source:c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\entidades.cpp
+	"entidades.hpp"
+
+1733617568 c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\entidades.hpp
+	"dominios.hpp"
+
+1733617490 c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\dominios.cpp
+	"dominios.hpp"
+	<set>
+
+1733616736 c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\dominios.hpp
+	<bits/stdc++.h>
+
+1733708066 ++.h>
+
+1733617480 source:c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\main.cpp
+	<iostream>
+	"dominios.hpp"
+	"entidades.hpp"
+
+1733617490 source:c:\users\duhon\onedrive\documents\code\cpp\tp1\tp1-trabalho-1\tp1\dominios.cpp
+	"dominios.hpp"
+	<set>
+
+1737410277 source:c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\dominios.cpp
+	"dominios.hpp"
+	<stdexcept>
+	<set>
+
+1737410277 >
+
+1737408731 c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\dominios.hpp
+	<bits/stdc++.h>
+
+1733683157 source:c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\entidades.cpp
+	"entidades.hpp"
+
+1737408425 c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\entidades.hpp
+	"dominios.hpp"
+
+1737409318 source:c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\main.cpp
+	<iostream>
+	"testes.hpp"
+	"dominios.hpp"
+	"entidades.hpp"
+
+1737408399 c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\testes.hpp
+	<stdexcept>
+	"dominios.hpp"
+
+1733712319 source:c:\users\evelyn soares\documents\codes\tp1-trabalho-1\tp1\testes.cpp
+	"testes.hpp"
+
+1733710805 p"
+
+1733702005 source:c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\dominios.cpp
+	"dominios.hpp"
+	<set>
+
+1733708066 c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\dominios.hpp
+	<bits/stdc++.h>
+
+1733710158 source:c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\main.cpp
+	<iostream>
+	"testes.hpp"
+	"dominios.hpp"
+	"entidades.hpp"
+
+1733710234 c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\testes.hpp
+	<stdexcept>
+	"dominios.hpp"
+
+1733708907 c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\entidades.hpp
+	"dominios.hpp"
+
+1733710805 source:c:\users\victo\downloads\tp1-trabalho-1\evelyn\tp1\testes.cpp
+	"testes.hpp"
+
+1737433332 source:/home/evelyn/Documentos/TP1/main.cpp
+	<iostream>
+	"dominios.hpp"
+
+1737408399 /home/evelyn/Documentos/TP1/testes.hpp
+	<stdexcept>
+	"dominios.hpp"
+
+1737433960 /home/evelyn/Documentos/TP1/dominios.hpp
+	<bits/stdc++.h>
+
+1737408425 /home/evelyn/Documentos/TP1/entidades.hpp
+	"dominios.hpp"
+
+1733712319 source:/home/evelyn/Documentos/TP1/testes.cpp
+	"testes.hpp"
+
+1737433929 source:/home/evelyn/Documentos/TP1/dominios.cpp
+	"dominios.hpp"
+	<stdexcept>
+
+1733710800 source:/home/evelyn/Documentos/TP1/entidades.cpp
+	"entidades.hpp"
+
