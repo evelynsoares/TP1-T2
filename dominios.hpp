@@ -40,8 +40,6 @@ public:
     int getNota();
 };
 
-
-/*
 ///
 /// A classe Data refere-se a data temporal (dia/mês/ano)
 ///
@@ -53,11 +51,11 @@ private:
 /// @param AA Ano (apenas os dois últimos digitos de um ano, 00 - 99)
 ///
     int DD, MM, AA;
-public:
     bool validar(int, int, int);
+public:
     Data(int d, int m, int a);
     void setData(int d, int m, int a);
-    Data getData(int &d, int &m, int &a);
+    string getData();
 };
 
 ///
@@ -69,8 +67,8 @@ class Dinheiro {
 ///
 private:
     double valor;
-public:
     bool validar(double);
+public:
     Dinheiro(double);
     void setValor(double v);
     double getValor();
@@ -85,8 +83,8 @@ class Duracao {
 ///
 private:
     int tempo;
-public:
     bool validar(int);
+public:
     Duracao(int);
     void setDuracao(int t);
     int getDuracao();
@@ -102,12 +100,11 @@ class Horario {
 ///
 private:
     int HH, MM;
-public:
     bool validar(int, int);
+public:
     Horario(int h, int m);
-    void setHora(int h);
-    void setMinuto(int m);
-    Horario getHorario(int &h, int &m);
+    void setHorario(int h, int m);
+    string getHorario();
 };
 
 ///
@@ -119,8 +116,8 @@ class Nome {
 ///
 private:
     char nome[30];
-public:
     bool validar(char *);
+public:
     Nome(char *);
     void setNome(char *n);
     string getNome(char *n);
@@ -135,11 +132,10 @@ class Senha {
 ///
 private:
     unsigned int senha;
-public:
     bool validar(unsigned int);
+public:
     Senha(unsigned int);
     void setSenha(unsigned int s);
     unsigned int getSenha();
 };
-*/
 #endif // DOMINIOS_HPP_INCLUDED

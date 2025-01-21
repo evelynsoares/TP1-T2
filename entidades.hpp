@@ -12,7 +12,7 @@ using namespace std;
 /// @see Codigo
 /// @author 170102785
 ///
-/*
+
 class Conta {
 private:
     Nome* nome;
@@ -188,5 +188,5 @@ public:
     void setAvaliacao( const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
 
 };
-*/
+
 #endif // ENTIDADES_HPP_INCLUDED

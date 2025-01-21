@@ -34,7 +34,7 @@ int TUCodigo::run(){
 
 void TUAvaliacao::testarCenarioValorValido(){
     try{
-        avaliacao.nota = VALOR_VALIDO;
+        avaliacao->nota = VALOR_VALIDO;
         cout << "Cenario de nota valida: " << avaliacao.nota <<endl;
         if(avaliacao.nota != VALOR_VALIDO)
         estado = FALHA;
@@ -43,7 +43,7 @@ void TUAvaliacao::testarCenarioValorValido(){
     }
 
     try {
-        codigo->setCodigo(VALOR_INVALIDO3);  
+        codigo->setCodigo(VALOR_INVALIDO3);
         cout << "Cenario de codigo invalido: " << codigo->getCodigo() << endl;
         estado = FALHA;
         cout << "argumento invalido";

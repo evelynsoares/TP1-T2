@@ -24,11 +24,16 @@ bool Codigo::validar(string codigo){
 }
 
 Codigo::Codigo(string c){
-    if(validar(c)){
+    try {
+        if(validar(c)){
         this->codigo = c;
-    } else {
-        throw invalid_argument(c);
+        } else {
+            throw invalid_argument(c);
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, codigo invalido: " << e.what() << endl;
     }
+
 }
 
 void Codigo::setCodigo(string c) {
@@ -55,11 +60,15 @@ bool Avaliacao::validar(int nota){
     return true;
 }
 
-Avaliacao::Avaliacao(int n) { //metodo construtor precisa ser inicializado com input valido
-    if (validar(n)) {
-        this->nota = n;
-    } else {
-        throw invalid_argument(to_string(n));
+Avaliacao::Avaliacao(int n) {
+    try {
+        if (validar(n)) {
+            this->nota = n;
+        } else {
+            throw invalid_argument(to_string(n));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, nota invalida: " << e.what() << endl;
     }
 }
 
@@ -79,36 +88,150 @@ int Avaliacao::getNota() {
     return nota;
 }
 
-
-
-/*
-
-bool Data::validar(int DD, int MM, int AA){
-    if(DD < 1 || DD > 31 || MM > 12 || MM < 1 || (DD > 30 && ((MM%2 == 0 && MM < 8) || (MM%2 && MM > 7))) || (AA%4 == 0 && MM == 2 && DD > 29)){
+bool Data::validar(int DD, int MM, int AA) {
+    if (DD < 1 || DD > 31 || MM > 12 || MM < 1 ||
+        (DD > 30 && ((MM % 2 == 0 && MM < 8) || (MM % 2 == 1 && MM > 7))) ||
+        (MM == 2 && ((AA % 4 == 0 && DD > 29) || (AA % 4 != 0 && DD > 28)))) {
         return false;
     }
     return true;
 }
 
-bool Dinheiro::validar(double m){
-    if(m > 200000 || m < 0){
-        return false;
+Data::Data(int DD, int MM, int AA) {
+    try {
+        if (validar(DD, MM, AA)) {
+            this->DD = DD;
+            this->MM = MM;
+            this->AA = AA;
+        } else {
+            string aux = to_string(DD) + "-" + to_string(MM) + "-" + to_string(AA);
+            throw invalid_argument(aux);
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, data invalida: " << e.what() << endl;
     }
-    return true;
 }
 
-bool Duracao::validar(int d){
-    if(d > 360 || d < 0){
-        return false;
+void Data::setData(int d, int m, int a) {
+    try {
+        if (validar(d, m, a)) {
+            DD = d;
+            MM = m;
+            AA = a;
+        } else {
+            string aux = to_string(d) + "-" + to_string(m) + "-" + to_string(a);
+            throw invalid_argument(aux);
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, data invalida: " << e.what() << endl;
     }
-    return true;
+}
+
+string Data::getData() {
+    return to_string(DD) + "-" + to_string(MM) + "-" + to_string(AA);
+}
+
+bool Dinheiro::validar(double m) {
+    return !(m > 200000 || m < 0);
+}
+
+Dinheiro::Dinheiro(double valor) {
+    try {
+        if (validar(valor)) {
+            this->valor = valor;
+        } else {
+            throw invalid_argument(to_string(valor));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, valor invalido: " << e.what() << endl;
+    }
+}
+
+void Dinheiro::setValor(double v) {
+    try {
+        if (validar(v)) {
+            this->valor = v;
+        } else {
+            throw invalid_argument(to_string(v));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, valor invalido: " << e.what() << endl;
+    }
+}
+
+double Dinheiro::getValor() {
+    return valor;
+}
+
+bool Duracao::validar(int d) {
+    return !(d > 360 || d < 0);
+}
+
+Duracao::Duracao(int t) {
+    try {
+        if (validar(t)) {
+            this->tempo = t;
+        } else {
+            throw invalid_argument(to_string(t));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, tempo invalido: " << e.what() << endl;
+    }
+}
+
+void Duracao::setDuracao(int t) {
+    try {
+        if (validar(t)) {
+            this->tempo = t;
+        } else {
+            throw invalid_argument(to_string(t));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, tempo invalido: " << e.what() << endl;
+    }
+}
+
+int Duracao::getDuracao() {
+    return tempo;
 }
 
 bool Horario::validar(int HH, int MM) {
-    if (HH > 23 || MM > 59) {
-        return false;
+    return !(HH > 23 || HH < 0 || MM > 59 || MM < 0);
+}
+
+void Horario::setHorario(int h, int m) {
+    try {
+        if(validar(h, m)){
+           this->HH = h;
+           this->MM = m;
+        }
+        else {
+            throw invalid_argument(to_string(h) + ":" + to_string(m));
+        }
+    } catch (invalid_argument& e){
+        cout << "Erro, horario invalido: " << e.what() << endl;
+
     }
-    return true;
+}
+
+string Horario::getHorario() {
+    string formatHH = (HH < 10 ? "0" : "") + to_string(HH);
+    string formatMM = (MM < 10 ? "0" : "") + to_string(MM);
+    return formatHH + ":" + formatMM;
+}
+
+Horario::Horario(int HH, int MM) {
+    try {
+        if (validar(HH, MM)) {
+            this->HH = HH;
+            this->MM = MM;
+        }
+        else {
+            throw invalid_argument(to_string(HH) + ":" + to_string(MM));
+        }
+    } catch (invalid_argument& e){
+        cout << "Erro, horario invalido: " << e.what() << endl;
+    }
 }
 
 bool Nome::validar(char* nome) {
@@ -123,6 +246,33 @@ bool Nome::validar(char* nome) {
     }
     return true;
 }
+
+void Nome::setNome(char *n) {
+    if (validar(n)) {
+        strncpy(nome, n, 30);
+        nome[29] = '\0';  // Assegura que o nome seja uma string terminada em '\0'
+    }
+}
+
+string Nome::getNome(char *n) {
+    strcpy(n, nome);  // Copia o conteúdo de 'nome' para o ponteiro 'n'
+    return string(n);  // Retorna o nome como string
+}
+
+Nome::Nome(char* nome) {
+    try {
+        if (validar(nome)) {
+            strncpy(this->nome, nome, 30);
+            this->nome[29] = '\0';
+        } else {
+            throw string(nome);
+        }
+    } catch (string aux) {
+        cout << "Erro: Nome invalido. Valor entrado: " << aux << endl;
+    }
+}
+
+
 
 bool Senha::validar(unsigned int senha) {
     string senha_str = to_string(senha);
@@ -155,143 +305,6 @@ bool Senha::validar(unsigned int senha) {
 }
 
 
-
-
-void Data::setData(int d, int m, int a) {
-    if (validar(d, m, a)) {
-        DD = d;
-        MM = m;
-        AA = a;
-    }
-}
-
-Data Data::getData(int &d, int &m, int &a) {
-    d = DD;
-    m = MM;
-    a = AA;
-    return *this; // retorna o objeto
-}
-
-Data::Data(int DD, int MM, int AA){
-    try{
-        if(validar(DD, MM, AA)){
-            this->DD = DD;
-            this->MM = MM;
-            this->AA = AA;
-        } else {
-            string aux = to_string(DD) + "-" + to_string(MM) + "-" + to_string(AA);
-            throw aux;
-        }
-    } catch (string aux) {
-        cout << "Erro: Data invalida. Valor entrado: " << aux << endl;
-    }
-}
-
-// 170102785
-void Dinheiro::setValor(double v) {
-    if (validar(v)) {
-        valor = v;
-    }
-}
-
-double Dinheiro::getValor() {
-    return valor;
-}
-
-Dinheiro::Dinheiro(double valor){
-    try {
-        if (validar(valor)){
-            this->valor = valor;
-        }
-        else {
-            throw valor;
-        }
-    } catch (double valor) {
-        cout << "Erro: Dinheiro invalido. Valor entrado: " << valor << endl;
-    }
-}
-
-// 170102785
-void Duracao::setDuracao(int t) {
-    if (validar(t)) {
-        tempo = t;
-    }
-}
-
-int Duracao::getDuracao() {
-    return tempo;
-}
-
-Duracao::Duracao(int tempo){
-    try {
-        if (validar(tempo)){
-            this->tempo = tempo;
-        }
-        else {
-            throw tempo;
-        }
-    }
-    catch (int tempo){
-        cout << "Erro: Duracao invalida. Valor entrado: " << tempo << endl;
-    }
-}
-
-void Horario::setHora(int h) {
-    if (validar(h, MM)) {
-        HH = h;
-    }
-}
-
-void Horario::setMinuto(int m) {
-    if (validar(HH, m)) {
-        MM = m;
-    }
-}
-
-Horario Horario::getHorario(int &h, int &m) {
-    h = HH;
-    m = MM;
-    return *this;
-}
-
-Horario::Horario(int HH, int MM) {
-    try {
-        if (validar(HH, MM)) {
-            this->HH = HH;
-            this->MM = MM;
-        } else {
-            string aux = to_string(HH) + ":" + to_string(MM);
-            throw aux;
-        }
-    } catch (string aux) {
-        cout << "Erro: Horario invalido. Valor entrado: " << aux << endl;
-    }
-}
-void Nome::setNome(char *n) {
-    if (validar(n)) {
-        strncpy(nome, n, 30);
-        nome[29] = '\0';  // Assegura que o nome seja uma string terminada em '\0'
-    }
-}
-
-string Nome::getNome(char *n) {
-    strcpy(n, nome);  // Copia o conteúdo de 'nome' para o ponteiro 'n'
-    return string(n);  // Retorna o nome como string
-}
-
-Nome::Nome(char* nome) {
-    try {
-        if (validar(nome)) {
-            strncpy(this->nome, nome, 30);
-            this->nome[29] = '\0';
-        } else {
-            throw string(nome);
-        }
-    } catch (string aux) {
-        cout << "Erro: Nome invalido. Valor entrado: " << aux << endl;
-    }
-}
-
 void Senha::setSenha(unsigned int s) {
     if (validar(s)) {
         senha = s;
@@ -312,4 +325,4 @@ Senha::Senha(unsigned int senha) {
         cout << "Erro: Senha invalida. Valor entrado: " << senha << endl;
     }
 }
-*/
+

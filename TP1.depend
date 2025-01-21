@@ -129,3 +129,29 @@
 1733710800 source:/home/evelyn/Documentos/TP1/entidades.cpp
 	"entidades.hpp"
 
+1737469631 source:/home/evelyn/Documentos/TP2/dominios.cpp
+	"dominios.hpp"
+	<stdexcept>
+
+1737468588 /home/evelyn/Documentos/TP2/dominios.hpp
+	<bits/stdc++.h>
+
+1733710800 source:/home/evelyn/Documentos/TP2/entidades.cpp
+	"entidades.hpp"
+
+1737469779 /home/evelyn/Documentos/TP2/entidades.hpp
+	"dominios.hpp"
+
+1733712319 source:/home/evelyn/Documentos/TP2/testes.cpp
+	"testes.hpp"
+
+1737408399 /home/evelyn/Documentos/TP2/testes.hpp
+	<stdexcept>
+	"dominios.hpp"
+
+1737469631 source:/home/evelyn/Documentos/TP2/main.cpp
+	<iostream>
+	"dominios.hpp"
+	"testes.hpp"
+	"entidades.hpp"
+
