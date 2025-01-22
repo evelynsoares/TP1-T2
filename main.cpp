@@ -51,10 +51,29 @@ int main() {
 
     Horario *horario = new Horario(10, 30);
     cout << "Horario inicial: " << horario->getHorario() << endl;
-    horario->setHorario(23, 99);
+    horario->setHorario(23, 99); //errado
     horario->setHorario(99, 2);
-    horario->setHorario(7, 45);
+    horario->setHorario(7, 45); //ok
     cout << "Horário atualizado: " << horario->getHorario() << endl;
+    delete horario;
 
+    Nome* nome = new Nome("Joao Silva");
+    cout << "Nome inicial: " << nome->getNome() << endl;
+    nome->setNome("1234");        // Invalido
+    nome->setNome("Um Nome Muito Muito Muito Longo"); // Invalido
+    nome->setNome("Maria Oliveira"); // Valido
+    cout << "Nome atualizado: " << nome->getNome() << endl;
+    delete nome;
+
+    Senha* senha = new Senha(76486);
+    cout << "Senha inicial: " << senha->getSenha() << endl;
+    senha->setSenha(76543);    // Invalida
+    senha->setSenha(11111);    // Invalida
+    senha->setSenha(45678);    // Invalida
+    senha->setSenha(123);      // Invalida
+    senha->setSenha(37468);
+    cout << "Senha atualizada: " << senha->getSenha() << endl;
+    delete senha;
+    
     return 0;
 }
