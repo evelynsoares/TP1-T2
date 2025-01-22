@@ -42,12 +42,11 @@ int main() {
 
     Duracao *temp = new Duracao(30);
     cout << "Tempo inicial: " << temp->getDuracao() << endl;
-    temp->setDuracao(39.8); // pega erro
+    temp->setDuracao(398); // pega erro
     temp->setDuracao(-9302); // pega erro
     temp->setDuracao(90);
     cout << "Duracao: " << temp->getDuracao() << endl;
     delete temp;
-
 
     Horario *horario = new Horario(10, 30);
     cout << "Horario inicial: " << horario->getHorario() << endl;

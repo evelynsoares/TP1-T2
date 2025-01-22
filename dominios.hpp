@@ -120,7 +120,7 @@ private:
 public:
     Nome(char *);
     void setNome(char *n);
-    string getNome(char *n);
+    string getNome();
 };
 
 ///
