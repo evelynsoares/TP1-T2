@@ -233,7 +233,6 @@ Horario::Horario(int HH, int MM) {
         cout << "Erro, horario invalido: " << e.what() << endl;
     }
 }
-
 bool Nome::validar(char* nome) {
     size_t length = strlen(nome);
     if (length == 0 || length > 30) {
@@ -248,15 +247,20 @@ bool Nome::validar(char* nome) {
 }
 
 void Nome::setNome(char *n) {
-    if (validar(n)) {
-        strncpy(nome, n, 30);
-        nome[29] = '\0';  // Assegura que o nome seja uma string terminada em '\0'
+   try {
+        if (validar(n)) {
+            strncpy(this->nome, n, 30);
+            this->nome[29] = '\0';
+        } else {
+            throw invalid_argument(string(n));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro, nome invalido: " << e.what() << endl;
     }
 }
 
-string Nome::getNome(char *n) {
-    strcpy(n, nome);  // Copia o conteúdo de 'nome' para o ponteiro 'n'
-    return string(n);  // Retorna o nome como string
+string Nome::getNome() {
+    return string(nome);
 }
 
 Nome::Nome(char* nome) {
@@ -265,30 +269,29 @@ Nome::Nome(char* nome) {
             strncpy(this->nome, nome, 30);
             this->nome[29] = '\0';
         } else {
-            throw string(nome);
+            throw invalid_argument(string(nome));
         }
-    } catch (string aux) {
-        cout << "Erro: Nome invalido. Valor entrado: " << aux << endl;
+    } catch (invalid_argument& e) {
+        cout << "Erro, nome invalido: " << e.what() << endl;
+        this->nome[0] = '\0';  // esvaziar a string
     }
 }
 
-
-
 bool Senha::validar(unsigned int senha) {
     string senha_str = to_string(senha);
-    int counter_d = 1, counter_c = 1; //comecar no 1 para comparar com o digito anterior
+    int counter_d = 1, counter_c = 1, counter_unicos = 1; //comecar no 1 para comparar com o digito anterior
 
     if (senha_str.length() != 5) {
         return false;
     }
 
-    set<char> dig_unicos; //checa se todos os digitos sao unicos
-    for (char c : senha_str) {
-        if (!isdigit(c) || dig_unicos.count(c) > 0) {
-            return false;
+    for(size_t i = 1; i < senha_str.length(); ++i){
+        if (senha_str[i] == senha_str[i-1]){
+            counter_unicos++;
         }
-        dig_unicos.insert(c);
     }
+    if (counter_unicos == 5) return false;
+
     //checa se a senha esta crescendo ou decrescendo
     for (size_t i = 1; i < senha_str.length(); ++i) {
         if (senha_str[i] < senha_str[i-1]) {
@@ -304,25 +307,31 @@ bool Senha::validar(unsigned int senha) {
     return true;
 }
 
+Senha::Senha(unsigned int s) {
+    try {
+        if (validar(s)) {
+            this->senha = s;
+        } else {
+            throw invalid_argument(to_string(s));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro: Senha invalida: " << e.what() << endl;
+        this->senha = 0;  // Set to default value on error
+    }
+}
 
 void Senha::setSenha(unsigned int s) {
-    if (validar(s)) {
-        senha = s;
+    try {
+        if (validar(s)) {
+            this->senha = s;
+        } else {
+            throw invalid_argument(to_string(s));
+        }
+    } catch (invalid_argument& e) {
+        cout << "Erro: Senha invalida: " << e.what() << endl;
     }
 }
 
 unsigned int Senha::getSenha() {
     return senha;
 }
-Senha::Senha(unsigned int senha) {
-    try {
-        if (validar(senha)) {
-            this->senha = senha;
-        } else {
-            throw senha;
-        }
-    } catch (unsigned int senha) {
-        cout << "Erro: Senha invalida. Valor entrado: " << senha << endl;
-    }
-}
-
