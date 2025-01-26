@@ -2,6 +2,7 @@
 #define ENTIDADES_HPP_INCLUDED
 
 #include "dominios.hpp"
+
 using namespace std;
 
 ///
@@ -15,24 +16,22 @@ using namespace std;
 
 class Conta {
 private:
-    Nome* nome;
-    Senha* senha;
     Codigo* codigo;
+    Senha* senha;
 
 public:
-    Conta(Nome* nome, Senha* senha, Codigo* codigo){
-        this->nome = nome;
+    Conta(Codigo* codigo, Senha* senha){
         this->senha = senha;
         this->codigo = codigo;
     }
 
-    Nome getNome() const { return *nome; }
+    Conta() = default;
+
     Senha getSenha() const { return *senha; }
     Codigo getCodigo() const { return *codigo;}
 
-    void setNome(const Nome& novoNome) { *nome = novoNome; }
-    void setSenha(const Senha& novaSenha) { *senha = novaSenha; }
-    void setCodigo(const Codigo& novoCodigo) { *codigo = novoCodigo;}
+    void setSenha(Senha& novaSenha) { *senha = novaSenha; }
+    void setCodigo(Codigo& novoCodigo) { *codigo = novoCodigo;}
 };
 
 ///
@@ -54,6 +53,7 @@ public:
         this->nome = nome;
         this->avaliacao=avaliacao;
     }
+    Viagem() = default;
 
     Codigo getCodigo() const { return *codigo;}
     Nome getNome() const { return *nome; }
@@ -188,5 +188,6 @@ public:
     void setAvaliacao( const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
 
 };
+
 
 #endif // ENTIDADES_HPP_INCLUDED

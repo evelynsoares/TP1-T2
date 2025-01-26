@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Evelyn Soares/Documents/Codes/TP1-T2",
-      "program": "c:/Users/Evelyn Soares/Documents/Codes/TP1-T2/build/Debug/outDebug",
+      "cwd": "c:/Users/Evelyn/Documents/Codes/TP1-T2",
+      "program": "c:/Users/Evelyn/Documents/Codes/TP1-T2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
