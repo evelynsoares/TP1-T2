@@ -69,7 +69,7 @@ int main() {
         cin >> opcao;
 
         switch (opcao) {
-            case 1: { 
+            case 1: { // Criar Viagem
                 string nomeViagemStr;
                 double avaliacaoViagemNota;
                 cout << "Digite o nome da viagem: ";
@@ -86,28 +86,27 @@ int main() {
                 Avaliacao avaliacaoViagem(avaliacaoViagemNota);
                 
                 Viagem viagem(&codigoViagem, &nomeViagem, &avaliacaoViagem);
-                controladoraViagem.criarViagem(viagem);
+                controladoraViagem.criarViagem(viagem); 
                 cout << "Viagem criada com sucesso!\n";
                 break;
             }
-            case 2: { 
+            case 2: { // Ler Viagem
                 string codigoViagemLidaStr;
                 cout << "Digite o codigo da viagem que deseja ler: ";
                 cin >> codigoViagemLidaStr;
                 try {
                     Viagem viagemLida = controladoraViagem.lerViagem(Codigo(codigoViagemLidaStr));
-                    cout << "Codigo da viagem lida: " << viagemLida.getCodigo().getCodigo()
-                        << " - Nome: " << viagemLida.getNome().getNome()
-                        << " - Avaliacao: " << viagemLida.getAvaliacao().getNota() << endl;
+                    cout << "Viagem lida: " << viagemLida.getNome().getNome()
+                         << " - Avaliacao: " << viagemLida.getAvaliacao().getNota() << endl;
                 } catch (const runtime_error& e) {
                     cout << e.what() << endl;
                 }
                 break;
             }
-            case 3: { 
+            case 3: { // Atualizar Viagem
                 string codigoViagemAtualizarStr;
                 cout << "Digite o codigo da viagem que deseja atualizar: ";
-                cin >> codigoViagemAtualizarStr; 
+                cin >> codigoViagemAtualizarStr;
 
                 string novoNomeViagemStr;
                 double novaAvaliacaoViagemNota;
@@ -125,7 +124,7 @@ int main() {
                 cout << "Viagem atualizada com sucesso!\n";
                 break;
             }
-            case 4: { 
+            case 4: { // Excluir Viagem -> nao funciona direito
                 string codigoViagemExcluirStr;
                 cout << "Digite o codigo da viagem que deseja excluir: ";
                 cin >> codigoViagemExcluirStr;
@@ -136,7 +135,7 @@ int main() {
                 }
                 break;
             }
-            case 5: { 
+            case 5: { // Listar Viagens
                 cout << "\nListando todas as viagens:\n";
                 vector<Viagem> viagens = controladoraViagem.listarViagens();
                 for (const auto& v : viagens) {
@@ -144,19 +143,19 @@ int main() {
                 }
                 break;
             }
-            case 6: { 
+            case 6: { // Adicionar Destino
                 cout << "Funcionalidade de adicionar destino ainda nao implementada.\n";
                 break;
             }
-            case 7: { 
+            case 7: { // Adicionar Hospedagem
                 cout << "Funcionalidade de adicionar hospedagem ainda nao implementada.\n";
                 break;
             }
-            case 8: { 
+            case 8: { // Adicionar Atividade
                 cout << "Funcionalidade de adicionar atividade ainda nao implementada.\n";
                 break;
             }
-            case 0: {
+            case 0: { // Sair
                 cout << "Saindo...\n";
                 break;
             }

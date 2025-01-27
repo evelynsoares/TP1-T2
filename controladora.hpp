@@ -4,11 +4,11 @@
 #include "dominios.hpp"
 
 #include <vector>
+#include <stack>
 
 using namespace std;
 
 static vector<Conta> bancoDeContas;
-static vector<Viagem> bancoDeViagens;
 
 class IUControladoraConta {
 public:
@@ -97,51 +97,91 @@ public:
 
 class LNCntrViagem : public ILNViajem {
 private:
-    vector<Viagem> bancoDeViagens;
+    stack<Viagem> bancoDeViagens; 
 
 public:
     bool criarViagem(const Viagem& viagem) override {
-        bancoDeViagens.push_back(viagem);
-        cout << "Viagem criada com sucesso!" << endl;
+        bancoDeViagens.push(viagem); 
+        cout << "Viagem criada com sucesso! Codigo: " << viagem.getCodigo().getCodigo() << endl;
         return true;
     }
 
     Viagem lerViagem(Codigo codigo) override {
-        for (const auto& v : bancoDeViagens) {
+        stack<Viagem> tempStack = bancoDeViagens; 
+        while (!tempStack.empty()) {
+            Viagem v = tempStack.top();
             if (v.getCodigo().getCodigo() == codigo.getCodigo()) {
                 return v;
             }
+            tempStack.pop();
         }
         throw runtime_error("Viagem nao encontrada.");
     }
 
     bool atualizarViagem(Viagem& viagem) override {
-        for (auto& v : bancoDeViagens) {
+        stack<Viagem> tempStack;
+        bool encontrada = false;
+
+        while (!bancoDeViagens.empty()) {
+            Viagem v = bancoDeViagens.top();
+            bancoDeViagens.pop();
             if (v.getCodigo().getCodigo() == viagem.getCodigo().getCodigo()) {
                 v.setNome(viagem.getNome());
                 v.setAvaliacao(viagem.getAvaliacao());
-                cout << "Viagem atualizada com sucesso!" << endl;
-                return true;
+                encontrada = true;
             }
+            tempStack.push(v); 
         }
-        return false;
+
+        while (!tempStack.empty()) {
+            bancoDeViagens.push(tempStack.top());
+            tempStack.pop();
+        }
+
+        if (encontrada) {
+            cout << "Viagem atualizada com sucesso!" << endl;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     bool excluirViagem(Codigo codigo) override {
-        for (auto it = bancoDeViagens.begin(); it != bancoDeViagens.end(); ++it) {
-            if (it->getCodigo().getCodigo() == codigo.getCodigo()) {
-                bancoDeViagens.erase(it);
+        stack<Viagem> tempStack;
+        bool encontrada = false;
+
+        while (!bancoDeViagens.empty()) {
+            Viagem v = bancoDeViagens.top();
+            bancoDeViagens.pop();
+            if (v.getCodigo().getCodigo() == codigo.getCodigo()) {
+                encontrada = true;
                 cout << "Viagem excluida com sucesso!" << endl;
-                return true;
+                break; 
             }
+            tempStack.push(v); 
         }
-        return false;
+
+        while (!tempStack.empty()) {
+            bancoDeViagens.push(tempStack.top());
+            tempStack.pop();
+        }
+
+        return encontrada;
     }
 
     vector<Viagem> listarViagens() override {
-        return bancoDeViagens;
+        vector<Viagem> viagens;
+        stack<Viagem> tempStack = bancoDeViagens; 
+
+        while (!tempStack.empty()) {
+            viagens.push_back(tempStack.top());
+            tempStack.pop();
+        }
+
+        reverse(viagens.begin(), viagens.end());
+
+        return viagens;
     }
 };
-
 
 #endif // CONTROLADORA_HPP_INCLUDED
