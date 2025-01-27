@@ -118,6 +118,10 @@ private:
     char nome[30];
     bool validar(char *);
 public:
+    Nome(const std::string& nome) {
+        strncpy(this->nome, nome.c_str(), sizeof(this->nome) - 1);
+        this->nome[sizeof(this->nome) - 1] = '\0';
+    }
     Nome(char *);
     void setNome(char *n);
     string getNome();

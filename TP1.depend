@@ -159,13 +159,13 @@
 	"dominios.hpp"
 	<stdexcept>
 
-1737554714 c:\users\evelyn\documents\codes\tp1-t2\dominios.hpp
+1738005448 c:\users\evelyn\documents\codes\tp1-t2\dominios.hpp
 	<bits/stdc++.h>
 
 1737554592 source:c:\users\evelyn\documents\codes\tp1-t2\entidades.cpp
 	"entidades.hpp"
 
-1737895676 c:\users\evelyn\documents\codes\tp1-t2\entidades.hpp
+1737899366 c:\users\evelyn\documents\codes\tp1-t2\entidades.hpp
 	"dominios.hpp"
 
 1737554592 source:c:\users\evelyn\documents\codes\tp1-t2\testes.cpp
@@ -182,12 +182,12 @@
 	"entidades.hpp"
 	"controladora.hpp"
 
-1737896612 c:\users\evelyn\documents\codes\tp1-t2\controladora.hpp
+1737898295 c:\users\evelyn\documents\codes\tp1-t2\controladora.hpp
 	"entidades.hpp"
 	"dominios.hpp"
 	<vector>
 
-1737892969 source:c:\users\evelyn\documents\codes\tp1-t2\controladora.cpp
+1737898367 source:c:\users\evelyn\documents\codes\tp1-t2\controladora.cpp
 	"controladora.hpp"
 	"entidades.hpp"
 	<iostream>
