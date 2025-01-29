@@ -57,22 +57,22 @@ public:
     virtual ~IUViagem() {}
 };
 
-class ILNViajem {
+class ILNViagem {
 public:
     virtual bool criarViagem(const Viagem& viagem) = 0;
     virtual Viagem lerViagem(Codigo codigo) = 0;
     virtual bool atualizarViagem(Viagem& viagem) = 0;
     virtual bool excluirViagem(Codigo codigo) = 0;
     virtual vector<Viagem> listarViagens() = 0;
-    virtual ~ILNViajem() {}
+    virtual ~ILNViagem() {}
 };
 
 class CntrIUViagem : public IUViagem {
 private:
-    ILNViajem* cntrLNViajem;
+    ILNViagem* cntrLNViajem;
 
 public:
-    CntrIUViagem(ILNViajem* cntrLNViajem) : cntrLNViajem(cntrLNViajem) {}
+    CntrIUViagem(ILNViagem* cntrLNViajem) : cntrLNViajem(cntrLNViajem) {}
 
     void criarViagem(const Viagem& viagem) override {
         cntrLNViajem->criarViagem(viagem);
@@ -87,7 +87,7 @@ public:
     }
 
     bool excluirViagem(Codigo codigo) override {
-        cntrLNViajem->excluirViagem(codigo);
+        return cntrLNViajem->excluirViagem(codigo);
     }
 
     vector<Viagem> listarViagens() override {
@@ -95,7 +95,7 @@ public:
     }
 };
 
-class LNCntrViagem : public ILNViajem {
+class LNCntrViagem : public ILNViagem {
 private:
     stack<Viagem> bancoDeViagens; 
 
