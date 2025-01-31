@@ -192,3 +192,43 @@
 	"entidades.hpp"
 	<iostream>
 
+1738339353 source:c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\controladora.cpp
+	"controladora.hpp"
+	"entidades.hpp"
+	<iostream>
+
+1738348772 c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\controladora.hpp
+	"entidades.hpp"
+	"dominios.hpp"
+	<vector>
+
+1738346392 c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\entidades.hpp
+	"dominios.hpp"
+	<vector>
+
+1738340408 c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\dominios.hpp
+	<bits/stdc++.h>
+
+1738339353 source:c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\dominios.cpp
+	"dominios.hpp"
+	<stdexcept>
+
+1738339353 source:c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\entidades.cpp
+	"entidades.hpp"
+
+1738339353 source:c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"dominios.hpp"
+	"testes.hpp"
+	"entidades.hpp"
+	"controladora.hpp"
+
+1738341321 c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\testes.hpp
+	<stdexcept>
+	"dominios.hpp"
+
+1738339353 source:c:\users\evelyn\downloads\tp1-t2-main\tp1-t2-main\testes.cpp
+	"testes.hpp"
+

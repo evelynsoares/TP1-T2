@@ -4,10 +4,11 @@
 #include "dominios.hpp"
 
 #include <vector>
-#include <stack>
+//#include <stack>
 
 using namespace std;
 
+//Conta
 static vector<Conta> bancoDeContas;
 
 class IUControladoraConta {
@@ -25,7 +26,6 @@ public:
 class CntrIUControladoraConta : public IUControladoraConta {
 private:
     ILNControladoraConta* cntrLNConta;
-
 public:
     CntrIUControladoraConta(ILNControladoraConta* cntrLNConta) : cntrLNConta(cntrLNConta) {}
 
@@ -39,14 +39,21 @@ public:
 };
 
 class LNControladoraConta : public ILNControladoraConta {
+private:
+    vector<Conta> bancoDeContas;
 public:
     bool criarConta(const Conta& conta) override {
         bancoDeContas.push_back(conta);
         return true;
     }
+
+    vector<Conta>& getBancoDeContas() {
+        return bancoDeContas;
+    }
 };
 
 
+//Viagem
 class IUViagem {
 public:
     virtual void criarViagem(const Viagem& viagem) = 0;
@@ -95,93 +102,150 @@ public:
     }
 };
 
+
 class LNCntrViagem : public ILNViagem {
 private:
-    stack<Viagem> bancoDeViagens; 
+    vector<Viagem> bancoDeViagens;
 
 public:
     bool criarViagem(const Viagem& viagem) override {
-        bancoDeViagens.push(viagem); 
+        bancoDeViagens.push_back(viagem); // Adiciona a viagem ao final do vetor
         cout << "Viagem criada com sucesso! Codigo: " << viagem.getCodigo().getCodigo() << endl;
         return true;
     }
 
     Viagem lerViagem(Codigo codigo) override {
-        stack<Viagem> tempStack = bancoDeViagens; 
-        while (!tempStack.empty()) {
-            Viagem v = tempStack.top();
-            if (v.getCodigo().getCodigo() == codigo.getCodigo()) {
-                return v;
+        for (const auto& viagem : bancoDeViagens) { // Itera sobre o vetor???
+            if (viagem.getCodigo().getCodigo() == codigo.getCodigo()) {
+                return viagem; 
             }
-            tempStack.pop();
         }
-        throw runtime_error("Viagem nao encontrada.");
+        throw runtime_error("Viagem nao encontrada."); 
     }
 
     bool atualizarViagem(Viagem& viagem) override {
-        stack<Viagem> tempStack;
-        bool encontrada = false;
-
-        while (!bancoDeViagens.empty()) {
-            Viagem v = bancoDeViagens.top();
-            bancoDeViagens.pop();
+        for (auto& v : bancoDeViagens) { 
             if (v.getCodigo().getCodigo() == viagem.getCodigo().getCodigo()) {
                 v.setNome(viagem.getNome());
                 v.setAvaliacao(viagem.getAvaliacao());
-                encontrada = true;
+                cout << "Viagem atualizada com sucesso!" << endl;
+                return true;
             }
-            tempStack.push(v); 
         }
-
-        while (!tempStack.empty()) {
-            bancoDeViagens.push(tempStack.top());
-            tempStack.pop();
-        }
-
-        if (encontrada) {
-            cout << "Viagem atualizada com sucesso!" << endl;
-            return true;
-        } else {
-            return false;
-        }
+        return false; 
     }
 
     bool excluirViagem(Codigo codigo) override {
-        stack<Viagem> tempStack;
-        bool encontrada = false;
-
-        while (!bancoDeViagens.empty()) {
-            Viagem v = bancoDeViagens.top();
-            bancoDeViagens.pop();
-            if (v.getCodigo().getCodigo() == codigo.getCodigo()) {
-                encontrada = true;
+        for (auto it = bancoDeViagens.begin(); it != bancoDeViagens.end(); ++it) { 
+            if (it->getCodigo().getCodigo() == codigo.getCodigo()) {
+                bancoDeViagens.erase(it); // Remove a viagem do vetor
                 cout << "Viagem excluida com sucesso!" << endl;
-                break; 
+                return true;
             }
-            tempStack.push(v); 
         }
-
-        while (!tempStack.empty()) {
-            bancoDeViagens.push(tempStack.top());
-            tempStack.pop();
-        }
-
-        return encontrada;
+        return false; 
     }
 
     vector<Viagem> listarViagens() override {
-        vector<Viagem> viagens;
-        stack<Viagem> tempStack = bancoDeViagens; 
-
-        while (!tempStack.empty()) {
-            viagens.push_back(tempStack.top());
-            tempStack.pop();
-        }
-
-        reverse(viagens.begin(), viagens.end());
-
-        return viagens;
+        return bancoDeViagens; // Retorna o vetor diretamente
     }
 };
 
+
+//Destino
+class IUDestino {
+public:
+    virtual void criarDestino(const Destino& destino) = 0;
+    virtual Destino lerDestino(Codigo codigo) = 0;
+    virtual void atualizarDestino(Destino& destino) = 0;
+    virtual bool excluirDestino(Codigo codigo) = 0;
+    virtual vector<Destino> listarDestinos() = 0;
+    virtual ~IUDestino() {}
+};
+
+//Interface de logica pra destino
+class ILNDestino {
+public:
+    virtual bool criarDestino(const Destino& destino) = 0;
+    virtual Destino lerDestino(Codigo codigo) = 0;
+    virtual bool atualizarDestino(Destino& destino) = 0;
+    virtual bool excluirDestino(Codigo codigo) = 0;
+    virtual vector<Destino> listarDestinos() = 0;
+    virtual ~ILNDestino() {}
+};
+
+class CntrIUDestino : public IUDestino {
+private:
+    ILNDestino* cntrLNDestino;
+
+public:
+    CntrIUDestino(ILNDestino* cntrLNDestino) : cntrLNDestino(cntrLNDestino) {}
+
+    void criarDestino(const Destino& destino) override {
+        cntrLNDestino->criarDestino(destino);
+    }
+
+    Destino lerDestino(Codigo codigo) override {
+        return cntrLNDestino->lerDestino(codigo);
+    }
+
+    void atualizarDestino(Destino& destino) override {
+        cntrLNDestino->atualizarDestino(destino);
+    }
+
+    bool excluirDestino(Codigo codigo) override {
+        return cntrLNDestino->excluirDestino(codigo);
+    }
+
+    vector<Destino> listarDestinos() override {
+        return cntrLNDestino->listarDestinos();
+    }
+};
+
+class LNCntrDestino : public ILNDestino {
+private:
+    vector<Destino> bancoDeDestinos;
+
+public:
+    bool criarDestino(const Destino& destino) override {
+        bancoDeDestinos.push_back(destino);
+        cout << "Destino criado com sucesso! Codigo: " << destino.getCodigo().getCodigo() << endl;
+        return true;
+    }
+
+    Destino lerDestino(Codigo codigo) override {
+        for (const auto& destino : bancoDeDestinos) {
+            if (destino.getCodigo().getCodigo() == codigo.getCodigo()) {
+                return destino;
+            }
+        }
+        throw runtime_error("Destino nao encontrado.");
+    }
+
+    bool atualizarDestino(Destino& destino) override {
+        for (auto& d : bancoDeDestinos) {
+            if (d.getCodigo().getCodigo() == destino.getCodigo().getCodigo()) {
+                d = destino; // Atualiza o destino diretamente
+                cout << "Destino atualizado com sucesso!" << endl;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool excluirDestino(Codigo codigo) override {
+        for (auto it = bancoDeDestinos.begin(); it != bancoDeDestinos.end(); ++it) {
+            if (it->getCodigo().getCodigo() == codigo.getCodigo()) {
+                bancoDeDestinos.erase(it);
+                cout << "Destino excluido com sucesso!" << endl;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    vector<Destino> listarDestinos() override {
+        return bancoDeDestinos;
+    }
+};
 #endif // CONTROLADORA_HPP_INCLUDED

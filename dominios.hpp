@@ -141,5 +141,8 @@ public:
     Senha(unsigned int);
     void setSenha(unsigned int s);
     unsigned int getSenha();
+    bool senhaValida(); 
 };
+
+
 #endif // DOMINIOS_HPP_INCLUDED

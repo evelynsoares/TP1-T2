@@ -2,6 +2,7 @@
 #define ENTIDADES_HPP_INCLUDED
 
 #include "dominios.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -63,54 +64,6 @@ public:
     void setNome(const Nome& novoNome) { *nome = novoNome; }
     void setAvaliacao(const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
 
-};
-
-///
-/// Classe Atividade refere-se a atividades no sistema
-/// possui Codigo, nome, data, horario, duração, preço(Dinheiro) e avaliação
-/// @see Codigo
-/// @see Nome
-/// @see Dinheiro
-/// @see Duracao
-/// @see Horario
-/// @see Avaliacao
-///
-class Atividade {
-private:
-    Codigo*codigo;
-    Nome* nome;
-    Data* data;
-    Horario* horario;
-    Duracao* duracao;
-    Dinheiro* preco;
-    Avaliacao* avaliacao;
-
-public:
-    Atividade(Codigo* codigo, Nome* nome, Data* data, Horario* horario, Duracao* duracao, Dinheiro* preco, Avaliacao* avaliacao){
-        this->codigo = codigo;
-        this->nome = nome;
-        this->data = data;
-        this->horario = horario;
-        this->duracao = duracao;
-        this->preco = preco;
-        this->avaliacao = avaliacao;
-    }
-
-    Codigo getCodigo() const { return *codigo;}
-    Nome getNome() const { return *nome; }
-    Data getData() const { return *data; }
-    Horario getHorario() const { return *horario; }
-    Duracao getDuracao() const { return *duracao; }
-    Dinheiro getPreco() const { return *preco; }
-    Avaliacao getAvaliacao() const { return *avaliacao; }
-
-    void setCodigo(const Codigo& novoCodigo) { *codigo = novoCodigo;}
-    void setNome(const Nome& novoNome) { *nome = novoNome;}
-    void setData(const Data& novaData) { *data = novaData;}
-    void setHorario(const Horario& novoHorario) { *horario = novoHorario; }
-    void setDuracao(const Duracao& novaDuracao) { *duracao = novaDuracao; }
-    void setPreco(const Dinheiro& novoPreco) { *preco = novoPreco; }
-    void setAvaliacao(const Avaliacao& novaAvaliacao)  { *avaliacao = novaAvaliacao; }
 };
 
 ///
@@ -187,6 +140,54 @@ public:
     void setDiaria( const Dinheiro& novaDiaria) { *diaria = novaDiaria; }
     void setAvaliacao( const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
 
+};
+
+///
+/// Classe Atividade refere-se a atividades no sistema
+/// possui Codigo, nome, data, horario, duração, preço(Dinheiro) e avaliação
+/// @see Codigo
+/// @see Nome
+/// @see Dinheiro
+/// @see Duracao
+/// @see Horario
+/// @see Avaliacao
+///
+class Atividade {
+private:
+    Codigo*codigo;
+    Nome* nome;
+    Data* data;
+    Horario* horario;
+    Duracao* duracao;
+    Dinheiro* preco;
+    Avaliacao* avaliacao;
+
+public:
+    Atividade(Codigo* codigo, Nome* nome, Data* data, Horario* horario, Duracao* duracao, Dinheiro* preco, Avaliacao* avaliacao){
+        this->codigo = codigo;
+        this->nome = nome;
+        this->data = data;
+        this->horario = horario;
+        this->duracao = duracao;
+        this->preco = preco;
+        this->avaliacao = avaliacao;
+    }
+
+    Codigo getCodigo() const { return *codigo;}
+    Nome getNome() const { return *nome; }
+    Data getData() const { return *data; }
+    Horario getHorario() const { return *horario; }
+    Duracao getDuracao() const { return *duracao; }
+    Dinheiro getPreco() const { return *preco; }
+    Avaliacao getAvaliacao() const { return *avaliacao; }
+
+    void setCodigo(const Codigo& novoCodigo) { *codigo = novoCodigo;}
+    void setNome(const Nome& novoNome) { *nome = novoNome;}
+    void setData(const Data& novaData) { *data = novaData;}
+    void setHorario(const Horario& novoHorario) { *horario = novoHorario; }
+    void setDuracao(const Duracao& novaDuracao) { *duracao = novaDuracao; }
+    void setPreco(const Dinheiro& novoPreco) { *preco = novoPreco; }
+    void setAvaliacao(const Avaliacao& novaAvaliacao)  { *avaliacao = novaAvaliacao; }
 };
 
 

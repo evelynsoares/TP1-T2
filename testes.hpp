@@ -7,7 +7,7 @@
 
 using namespace std;
 
-
+/*
 class TUAvaliacao {
     private:
         const static int VALOR_VALIDO =  5 ;
@@ -25,7 +25,7 @@ class TUAvaliacao {
         const static int FALHA = -1;
         int run();
 };
-/*
+
 class TUCodigo {
     private:
         const  string VALOR_VALIDO =  "Az�301" ;

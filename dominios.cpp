@@ -279,7 +279,9 @@ Nome::Nome(char* nome) {
 
 bool Senha::validar(unsigned int senha) {
     string senha_str = to_string(senha);
-    int counter_d = 1, counter_c = 1, counter_unicos = 1; //comecar no 1 para comparar com o digito anterior
+    
+    //comecar no 1 para comparar com o digito anterior
+    int counter_d = 1, counter_c = 1, counter_unicos = 1;
 
     if (senha_str.length() != 5) {
         return false;
@@ -296,7 +298,7 @@ bool Senha::validar(unsigned int senha) {
     for (size_t i = 1; i < senha_str.length(); ++i) {
         if (senha_str[i] < senha_str[i-1]) {
             counter_d++;
-        } else if (senha_str[i] == senha_str[i+1]) {
+        } else if (senha_str[i] > senha_str[i-1]) {
             counter_c++;
         }
     }
@@ -334,4 +336,8 @@ void Senha::setSenha(unsigned int s) {
 
 unsigned int Senha::getSenha() {
     return senha;
+}
+
+bool Senha::senhaValida() {
+    return validar(senha);
 }
