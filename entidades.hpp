@@ -71,7 +71,7 @@ public:
     void setAvaliacao(const Avaliacao& novaAvaliacao) { avaliacao = novaAvaliacao; }
 };
 
-/*
+
 ///
 /// Destino refere-se a destinos dentro do sistema
 /// possui Codigo, Nome, duas datas (Inicio e termino), avaliação, viagens, atividade e hospedagem.
@@ -227,5 +227,5 @@ public:
     void addDestino (Codigo codDestino) { destinos.push_back(codDestino);}
     void remDestino (Codigo codDestino) {destinos.erase(remove(destinos.begin(), destinos.end(), codDestino), destinos.end());}
 };
-*/
+
 #endif // ENTIDADES_HPP_INCLUDED
