@@ -91,20 +91,21 @@ private:
     Data* dataDeTermino;
     Avaliacao* avaliacao;
     vector<Codigo> viagens;
-    Codigo* atividade;
-    Codigo* hospedagem;
+    vector<Codigo> atividades;
+    Codigo* hospedagem[1];
+    Codigo* viagem;
 
 public:
 
-    Destino(Codigo* codigo, Nome* nome, Data* dataDeInicio, Data* dataDeTermino, Avaliacao* avaliacao, Codigo* atividade, Codigo* hospedagem){
+    Destino(Codigo* codigo, Nome* nome, Data* dataDeInicio, Data* dataDeTermino, Avaliacao* avaliacao, Codigo* viagem){
         this->codigo = codigo;
         this->nome = nome;
         this->dataDeInicio = dataDeInicio;
         this->dataDeTermino = dataDeTermino;
         this->avaliacao = avaliacao;
         this->viagens = {};
-        this->atividade = atividade;
-        this->hospedagem = hospedagem;
+        this->atividades = {};
+        this->viagem = viagem;
     }
 
 
@@ -114,8 +115,8 @@ public:
     Data getDataDeTermino() const { return *dataDeTermino;}
     Avaliacao getAvaliacao() const { return *avaliacao;}
     vector<Codigo> getViagens() const { return viagens;}
-    Codigo getAtividade() const { return *atividade;}
-    Codigo getHospedagem() const { return *hospedagem;}
+    vector<Codigo> getAtividade() const { return atividades;}
+    Codigo* getHospedagem() const { return *hospedagem;}
 
     void setCodigo( const Codigo& novoCodigo) { *codigo = novoCodigo; }
     void setNome( const Nome& novoNome) { *nome = novoNome; }
@@ -124,8 +125,10 @@ public:
     void setAvaliacao ( const Avaliacao& novaAvaliacao ) { *avaliacao = novaAvaliacao;}
     void addViagem (Codigo codViagem) { viagens.push_back(codViagem);}
     void remViagem (Codigo codViagem) {viagens.erase(remove(viagens.begin(), viagens.end(), codViagem), viagens.end());}
-    void setAtividade (const Codigo& codAtividade) {*atividade = codAtividade;}
-    void setHospedagem (const Codigo& codHospedagem) { *hospedagem = codHospedagem;}
+    void addAtividade (Codigo codAtividade) { atividades.push_back(codAtividade);}
+    void remAtividade (Codigo codAtividade) {atividades.erase(remove(atividades.begin(), atividades.end(), codAtividade), atividades.end());}
+    void setHospedagem (Codigo codHospedagem) { hospedagem[0] = &codHospedagem;}
+    void remHospedagem () { hospedagem[0] = {};}
 
 };
 
@@ -146,29 +149,28 @@ private:
 ///
     Dinheiro* diaria;
     Avaliacao* avaliacao;
-    vector<Codigo> destinos;
+    Codigo* destino;
 
 public:
-    Hospedagem(Nome* nome, Codigo* codigo, Dinheiro* diaria, Avaliacao* avaliacao){
+    Hospedagem(Nome* nome, Codigo* codigo, Dinheiro* diaria, Avaliacao* avaliacao, Codigo* destino){
         this->nome = nome;
         this->codigo = codigo;
         this->diaria = diaria;
         this->avaliacao = avaliacao;
-        this->destinos = {};
+        this->destino = destino;
     }
 
     Codigo getCodigo() const { return *codigo;}
     Nome getNome() const { return *nome; }
     Dinheiro getDiaria() const { return *diaria; }
     Avaliacao getAvaliacao() const { return *avaliacao;}
-    vector<Codigo> getDestinos() const { return destinos;}
+    Codigo getDestino() const { return *destino;}
 
     void setCodigo( const Codigo& novoCodigo) { *codigo = novoCodigo; }
     void setNome( const Nome& novoNome) { *nome = novoNome; }
     void setDiaria( const Dinheiro& novaDiaria) { *diaria = novaDiaria; }
     void setAvaliacao( const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
-    void addDestino (Codigo codDestino) { destinos.push_back(codDestino);}
-    void remDestino (Codigo codDestino) {destinos.erase(remove(destinos.begin(), destinos.end(), codDestino), destinos.end());}
+    void setDestino (const Codigo& codDestino) { *destino = codDestino;}
 
 };
 

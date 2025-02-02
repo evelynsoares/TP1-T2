@@ -230,8 +230,10 @@ int main() {
 
                     Avaliacao avaliacaoDestino(avaliacaoDestinoNota);
 
-                    //Destino destino(&codigoDestino, &nomeDestino, &dataInicio, &dataTermino, &avaliacaoDestino, &codigoViagemAssDestino);
-                    //controladoraDestino.criarDestino(destino);
+                    Codigo codHospedagem(codHospedagem);
+
+                    Destino destino(&codigoDestino, &nomeDestino, &dataInicio, &dataTermino, &avaliacaoDestino, &codigoViagemAssDestino);
+                    controladoraDestino.criarDestino(destino);
                     } catch (const runtime_error& e) {
                     cout << "Erro, nao foi possivel adicionar um destino: " << e.what() << endl;
                 }
@@ -316,10 +318,43 @@ int main() {
             }
             case 11: { // Adicionar Hospedagem
                 // cout << "Funcionalidade de adicionar hospedagem ainda nao implementada.\n";
-                string hosp;
+                string destino;
                 cout << "Digite o código do destino da hospedagem: ";
-                cin >> hosp;
+                cin >> destino;
 
+                try{
+                    Codigo codDestino(destino);
+
+                    Viagem viagemAssociada = controladoraViagem.lerViagem(Codigo(codDestino));
+                    cout << "Destino encontrado: " << viagemAssociada.getNome().getNome() << endl;
+
+                    string nomeHospStr;
+                    cout << "Digite o nome da hospedagem: ";
+                    cin.ignore(); 
+                    getline(cin, nomeHospStr);
+
+                    string codigoHospStr = gerarCodigoAleatorio();
+                    Codigo codigoHosp(codigoHospStr);
+                    Nome nomeHosp(nomeHospStr);
+
+                    int diaria;
+                    cout << "Digite o valor da diária da hospedagem: ";
+
+                    cin >> diaria;
+                    Dinheiro diariaValor(diaria);
+
+                    int avaliacaoHospNota;
+                    cout << "Digite a avaliacao da hospedagem (0-5): ";
+                    cin >> avaliacaoHospNota;
+                    Avaliacao avaliacaoHosp(avaliacaoHospNota);
+
+                    Hospedagem novaHospedagem(&nomeHosp, &codigoHosp, &diariaValor, &avaliacaoHosp, &codDestino);
+
+                    // controladoraHospedagem?
+
+                } catch (const runtime_error& e) {
+                    cout << e.what() << endl;
+                }
                 break;
             }
             case 12: { // Ler Hospedagem
