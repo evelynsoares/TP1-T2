@@ -230,8 +230,8 @@ int main() {
 
                     Avaliacao avaliacaoDestino(avaliacaoDestinoNota);
 
-                    Destino destino(&codigoDestino, &nomeDestino, &dataInicio, &dataTermino, &avaliacaoDestino, &codigoViagemAssDestino);
-                    controladoraDestino.criarDestino(destino);
+                    //Destino destino(&codigoDestino, &nomeDestino, &dataInicio, &dataTermino, &avaliacaoDestino, &codigoViagemAssDestino);
+                    //controladoraDestino.criarDestino(destino);
                     } catch (const runtime_error& e) {
                     cout << "Erro, nao foi possivel adicionar um destino: " << e.what() << endl;
                 }
