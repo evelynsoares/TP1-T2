@@ -2,9 +2,7 @@
 #define CONTROLADORA_HPP_INCLUDED
 #include "entidades.hpp"
 #include "dominios.hpp"
-
 #include <vector>
-//#include <stack>
 
 using namespace std;
 
@@ -58,7 +56,7 @@ class IUViagem {
 public:
     virtual void criarViagem(const Viagem& viagem) = 0;
     virtual Viagem lerViagem(Codigo codigo) = 0;
-    virtual void atualizarViagem(Viagem& viagem) = 0;
+    virtual bool atualizarViagem(Viagem& viagem) = 0;
     virtual bool excluirViagem(Codigo codigo) = 0;
     virtual vector<Viagem> listarViagens() = 0;
     virtual ~IUViagem() {}
@@ -89,8 +87,8 @@ public:
         return cntrLNViajem->lerViagem(codigo);
     }
 
-    void atualizarViagem(Viagem& viagem) override {
-        cntrLNViajem->atualizarViagem(viagem);
+    bool atualizarViagem(Viagem& viagem) override {
+        return cntrLNViajem->atualizarViagem(viagem);
     }
 
     bool excluirViagem(Codigo codigo) override {
@@ -102,21 +100,23 @@ public:
     }
 };
 
-
 class LNCntrViagem : public ILNViagem {
 private:
     vector<Viagem> bancoDeViagens;
 
 public:
     bool criarViagem(const Viagem& viagem) override {
-        bancoDeViagens.push_back(viagem); // Adiciona a viagem ao final do vetor
+        bancoDeViagens.push_back(viagem);
         cout << "Viagem criada com sucesso! Codigo: " << viagem.getCodigo().getCodigo() << endl;
+        cout << "Associada a conta: " << viagem.getContaAssociada().getCodigo() << endl;
         return true;
     }
 
     Viagem lerViagem(Codigo codigo) override {
-        for (const auto& viagem : bancoDeViagens) { // Itera sobre o vetor???
+        // Itera sobre o vetor
+        for (const auto& viagem : bancoDeViagens) { 
             if (viagem.getCodigo().getCodigo() == codigo.getCodigo()) {
+                cout << "lendo codigo: " << viagem.getCodigo().getCodigo() << endl;
                 return viagem; 
             }
         }
@@ -124,6 +124,7 @@ public:
     }
 
     bool atualizarViagem(Viagem& viagem) override {
+        // Itera sobre o vetor
         for (auto& v : bancoDeViagens) { 
             if (v.getCodigo().getCodigo() == viagem.getCodigo().getCodigo()) {
                 v.setNome(viagem.getNome());
@@ -136,9 +137,10 @@ public:
     }
 
     bool excluirViagem(Codigo codigo) override {
+        // Itera sobre o vetor e remove a viagem pelo codigo 
         for (auto it = bancoDeViagens.begin(); it != bancoDeViagens.end(); ++it) { 
             if (it->getCodigo().getCodigo() == codigo.getCodigo()) {
-                bancoDeViagens.erase(it); // Remove a viagem do vetor
+                bancoDeViagens.erase(it); // Remove a viagem 
                 cout << "Viagem excluida com sucesso!" << endl;
                 return true;
             }
@@ -147,7 +149,7 @@ public:
     }
 
     vector<Viagem> listarViagens() override {
-        return bancoDeViagens; // Retorna o vetor diretamente
+        return vector<Viagem>(bancoDeViagens); // Retorna uma cópia do vetor
     }
 };
 
@@ -157,7 +159,7 @@ class IUDestino {
 public:
     virtual void criarDestino(const Destino& destino) = 0;
     virtual Destino lerDestino(Codigo codigo) = 0;
-    virtual void atualizarDestino(Destino& destino) = 0;
+    virtual bool atualizarDestino(Destino& destino) = 0;
     virtual bool excluirDestino(Codigo codigo) = 0;
     virtual vector<Destino> listarDestinos() = 0;
     virtual ~IUDestino() {}
@@ -189,8 +191,8 @@ public:
         return cntrLNDestino->lerDestino(codigo);
     }
 
-    void atualizarDestino(Destino& destino) override {
-        cntrLNDestino->atualizarDestino(destino);
+    bool atualizarDestino(Destino& destino) override {
+        return cntrLNDestino->atualizarDestino(destino);
     }
 
     bool excluirDestino(Codigo codigo) override {

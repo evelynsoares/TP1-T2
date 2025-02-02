@@ -14,31 +14,29 @@ using namespace std;
 /// @see Codigo
 /// @see Viagem
 /// @author 170102785
-
 ///
-
 class Conta {
 private:
-    Codigo* codigo;
-    Senha* senha;
-    Codigo* viagem;
+    Codigo codigo;
+    Senha senha;
+    Codigo viagem;
 
 public:
-    Conta(Codigo* codigo, Senha* senha, Codigo* viagem){
-        this->senha = senha;
-        this->codigo = codigo;
-        this->viagem = viagem;
-    }
-
     Conta() = default;
 
-    Senha getSenha() const { return *senha; }
-    Codigo getCodigo() const { return *codigo;}
-    Codigo getViagem() const { return *viagem;}
+    Conta(const Codigo& codigo, const Senha& senha) 
+        : codigo(codigo), senha(senha), viagem(Codigo()) {}
 
-    void setSenha(Senha& novaSenha) { *senha = novaSenha; }
-    void setCodigo(Codigo& novoCodigo) { *codigo = novoCodigo;}
-    void setViagem(Codigo& codViagem) { *viagem = codViagem;}
+    Conta(const Codigo& codigo, const Senha& senha, const Codigo& viagem) 
+        : codigo(codigo), senha(senha), viagem(viagem) {}
+
+    Senha getSenha() const { return senha; }
+    Codigo getCodigo() const { return codigo; }
+    Codigo getViagem() const { return viagem; }
+
+    void setSenha(const Senha& novaSenha) { senha = novaSenha; }
+    void setCodigo(const Codigo& novoCodigo) { codigo = novoCodigo; }
+    void setViagem(const Codigo& codViagem) { viagem = codViagem; }
 };
 
 ///
@@ -49,38 +47,30 @@ public:
 /// @see Avaliacao
 /// @see Conta
 ///
+
 class Viagem {
 private:
-    Codigo* codigo;
-    Nome* nome;
-    Avaliacao* avaliacao;
-    Destino* destino;
-    vector<Codigo> contas;
+    Codigo codigo;
+    Nome nome;
+    Avaliacao avaliacao;
+    Codigo contaAssociada;
 
 public:
-    Viagem(Codigo* codigo, Nome* nome, Avaliacao* avaliacao, Destino* destino){
-        this->codigo = codigo;
-        this->nome = nome;
-        this->avaliacao=avaliacao;
-        this->destino=destino;
-        this->contas = {};
-    }
+    Viagem(const Codigo& codigo, const Nome& nome, const Avaliacao& avaliacao, const Codigo& contaAssociada)
+        : codigo(codigo), nome(nome), avaliacao(avaliacao), contaAssociada(contaAssociada) {}
+
     Viagem() = default;
 
-    Codigo getCodigo() const { return *codigo;}
-    Nome getNome() const { return *nome; }
-    Avaliacao getAvaliacao() const { return *avaliacao; }
-    Destino getDestino() const { return *destino;}
-    vector<Codigo> getContas () const { return contas;}
+    Codigo getCodigo() const { return codigo; }
+    Nome getNome() const { return nome; }
+    Avaliacao getAvaliacao() const { return avaliacao; }
+    Codigo getContaAssociada() const { return contaAssociada; }
 
-    void setCodigo(const Codigo& novoCodigo) { *codigo = novoCodigo;}
-    void setNome(const Nome& novoNome) { *nome = novoNome; }
-    void setAvaliacao(const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
-    void setDestino(const Destino& novoDestino) { *destino = novoDestino;}
-    void addConta (Codigo codConta){ contas.push_back(codConta);}
-    void remConta (Codigo codConta) {contas.erase(remove(contas.begin(), contas.end(), codConta), contas.end());}
-
+    void setCodigo(const Codigo& novoCodigo) { codigo = novoCodigo; }
+    void setNome(const Nome& novoNome) { nome = novoNome; }
+    void setAvaliacao(const Avaliacao& novaAvaliacao) { avaliacao = novaAvaliacao; }
 };
+
 
 ///
 /// Destino refere-se a destinos dentro do sistema
@@ -105,6 +95,7 @@ private:
     Codigo* hospedagem;
 
 public:
+
     Destino(Codigo* codigo, Nome* nome, Data* dataDeInicio, Data* dataDeTermino, Avaliacao* avaliacao, Codigo* atividade, Codigo* hospedagem){
         this->codigo = codigo;
         this->nome = nome;
@@ -115,6 +106,7 @@ public:
         this->atividade = atividade;
         this->hospedagem = hospedagem;
     }
+
 
     Codigo getCodigo() const { return *codigo;}
     Nome getNome() const { return *nome; }
@@ -233,6 +225,5 @@ public:
     void addDestino (Codigo codDestino) { destinos.push_back(codDestino);}
     void remDestino (Codigo codDestino) {destinos.erase(remove(destinos.begin(), destinos.end(), codDestino), destinos.end());}
 };
-
 
 #endif // ENTIDADES_HPP_INCLUDED

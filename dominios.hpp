@@ -19,6 +19,7 @@ private:
     bool validar(string);
 
 public:
+    Codigo() : codigo("") {}
     Codigo(string);
     void setCodigo(string c);
     string getCodigo();
