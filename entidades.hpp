@@ -54,11 +54,11 @@ private:
     Codigo* codigo;
     Nome* nome;
     Avaliacao* avaliacao;
-    Destino* destino;
+    Codigo* destino;
     vector<Codigo> contas;
 
 public:
-    Viagem(Codigo* codigo, Nome* nome, Avaliacao* avaliacao, Destino* destino){
+    Viagem(Codigo* codigo, Nome* nome, Avaliacao* avaliacao, Codigo* destino){
         this->codigo = codigo;
         this->nome = nome;
         this->avaliacao=avaliacao;
@@ -70,13 +70,13 @@ public:
     Codigo getCodigo() const { return *codigo;}
     Nome getNome() const { return *nome; }
     Avaliacao getAvaliacao() const { return *avaliacao; }
-    Destino getDestino() const { return *destino;}
+    Codigo getDestino() const { return *destino;}
     vector<Codigo> getContas () const { return contas;}
 
     void setCodigo(const Codigo& novoCodigo) { *codigo = novoCodigo;}
     void setNome(const Nome& novoNome) { *nome = novoNome; }
     void setAvaliacao(const Avaliacao& novaAvaliacao) { *avaliacao = novaAvaliacao; }
-    void setDestino(const Destino& novoDestino) { *destino = novoDestino;}
+    void setDestino(const Codigo& codDestino) { *destino = codDestino;}
     void addConta (Codigo codConta){ contas.push_back(codConta);}
     void remConta (Codigo codConta) {contas.erase(remove(contas.begin(), contas.end(), codConta), contas.end());}
 

@@ -68,7 +68,9 @@ int main() {
         try {
             Senha senhaConta(stoi(senhaContaStr));
             if (senhaConta.senhaValida()) {
-                Conta novaConta(&codigoConta, &senhaConta);
+                string tmp = gerarCodigoAleatorio();
+                Codigo codigoViagemPlaceholder(tmp);
+                Conta novaConta(&codigoConta, &senhaConta, &codigoViagemPlaceholder);
                 controladoraConta.criarConta(novaConta);
                 cout << "Codigo da conta: " << novaConta.getCodigo().getCodigo() << endl;
                 cout << "Usuario autenticado!" << endl;
@@ -101,6 +103,14 @@ int main() {
                 getline(cin, nomeViagemStr);
                 cout << "Digite a avaliacao da viagem (0-5): ";
                 cin >> avaliacaoViagemNota;
+                
+                string tmp;
+                cout << "Digite o destino da viagem (caso não exista, aperte enter e crie um. Esta operação fecha a criação de viagem): ";
+                cin >> tmp;
+                if(tmp == ""){
+                    break;
+                }
+                Codigo destinoViagem(tmp);
 
                 string codigoViagemStr = gerarCodigoAleatorio();
                 cout << "Codigo gerado para a viagem: " << codigoViagemStr << endl;
@@ -109,7 +119,7 @@ int main() {
                 Nome nomeViagem(nomeViagemStr);
                 Avaliacao avaliacaoViagem(avaliacaoViagemNota);
                 
-                Viagem viagem(&codigoViagem, &nomeViagem, &avaliacaoViagem);
+                Viagem viagem(&codigoViagem, &nomeViagem, &avaliacaoViagem, &destinoViagem);
                 controladoraViagem.criarViagem(viagem); 
                 cout << "Viagem criada com sucesso!\n";
                 break;
@@ -121,7 +131,8 @@ int main() {
                 try {
                     Viagem viagemLida = controladoraViagem.lerViagem(Codigo(codigoViagemLidaStr));
                     cout << "Viagem lida: " << viagemLida.getNome().getNome()
-                         << " - Avaliacao: " << viagemLida.getAvaliacao().getNota() << endl;
+                         << " - Avaliacao: " << viagemLida.getAvaliacao().getNota()
+                         << " - Código do Destino: " << viagemLida.getDestino().getCodigo() << endl;
                 } catch (const runtime_error& e) {
                     cout << e.what() << endl;
                 }
@@ -140,10 +151,19 @@ int main() {
                 cout << "Digite a nova avaliacao da viagem (0-5): ";
                 cin >> novaAvaliacaoViagemNota;
 
+                string tmp;
+
+                cout << "Digite o novo código de destino (deixar esse parametro em branco fechara o prompt): ";
+                cin >> tmp;
+                if(tmp == ""){
+                    break;
+                }
+                Codigo novoDestino(tmp);
+
                 Codigo codigoViagemAtualizar(codigoViagemAtualizarStr);
                 Nome novoNomeViagem(novoNomeViagemStr);
                 Avaliacao novaAvaliacaoViagem(novaAvaliacaoViagemNota);
-                Viagem viagemAtualizada(&codigoViagemAtualizar, &novoNomeViagem, &novaAvaliacaoViagem);
+                Viagem viagemAtualizada(&codigoViagemAtualizar, &novoNomeViagem, &novaAvaliacaoViagem, &novoDestino);
                 controladoraViagem.atualizarViagem(viagemAtualizada);
                 cout << "Viagem atualizada com sucesso!\n";
                 break;
@@ -282,7 +302,11 @@ int main() {
                 break;
             }
             case 11: { // Adicionar Hospedagem
-                cout << "Funcionalidade de adicionar hospedagem ainda nao implementada.\n";
+                // cout << "Funcionalidade de adicionar hospedagem ainda nao implementada.\n";
+                string hosp;
+                cout << "Digite o código do destino da hospedagem: ";
+                cin >> hosp;
+
                 break;
             }
             case 12: { // Adicionar Atividade
