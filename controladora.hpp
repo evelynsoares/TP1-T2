@@ -152,7 +152,7 @@ public:
         return vector<Viagem>(bancoDeViagens); // Retorna uma cópia do vetor
     }
 };
-/*
+
 
 //Destino
 class IUDestino {
@@ -250,7 +250,4 @@ public:
         return bancoDeDestinos;
     }
 };
-
-
-*/
 #endif // CONTROLADORA_HPP_INCLUDED
