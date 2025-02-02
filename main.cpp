@@ -141,15 +141,6 @@ int main() {
                 cout << "Digite a nova avaliacao da viagem (0-5): ";
                 cin >> novaAvaliacaoViagemNota;
 
-                string tmp;
-
-                cout << "Digite o novo código de destino (deixar esse parametro em branco fechara o prompt): ";
-                cin >> tmp;
-                if(tmp == ""){
-                    break;
-                }
-                Codigo novoDestino(tmp);
-
                 Codigo codigoViagemAtualizar(codigoViagemAtualizarStr);
                 Nome novoNomeViagem(novoNomeViagemStr);
                 Avaliacao novaAvaliacaoViagem(novaAvaliacaoViagemNota);
