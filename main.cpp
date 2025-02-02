@@ -86,8 +86,8 @@ int main() {
     // Inicializa a interface de viagem, destino, hospedagem e atividades
     LNCntrViagem servicoViagem; 
     CntrIUViagem controladoraViagem(&servicoViagem);
-    LNCntrDestino servicoDestino;
-    CntrIUDestino controladoraDestino(&servicoDestino);
+    //LNCntrDestino servicoDestino;
+    //CntrIUDestino controladoraDestino(&servicoDestino);
 
     int opcao;
     do {
@@ -102,14 +102,6 @@ int main() {
                 getline(cin, nomeViagemStr);
                 cout << "Digite a avaliacao da viagem (0-5): ";
                 cin >> avaliacaoViagemNota;
-                
-                string tmp;
-                cout << "Digite o destino da viagem (caso não exista, aperte enter e crie um. Esta operação fecha a criação de viagem): ";
-                cin >> tmp;
-                if(tmp == ""){
-                    break;
-                }
-                Codigo destinoViagem(tmp);
 
                 string codigoViagemStr = gerarCodigoAleatorio();
 
@@ -149,15 +141,6 @@ int main() {
                 cout << "Digite a nova avaliacao da viagem (0-5): ";
                 cin >> novaAvaliacaoViagemNota;
 
-                string tmp;
-
-                cout << "Digite o novo código de destino (deixar esse parametro em branco fechara o prompt): ";
-                cin >> tmp;
-                if(tmp == ""){
-                    break;
-                }
-                Codigo novoDestino(tmp);
-
                 Codigo codigoViagemAtualizar(codigoViagemAtualizarStr);
                 Nome novoNomeViagem(novoNomeViagemStr);
                 Avaliacao novaAvaliacaoViagem(novaAvaliacaoViagemNota);
@@ -190,7 +173,7 @@ int main() {
                     }
                 }
                 break;
-            }
+            }/*
             case 6: { // Criar Destino
                 string codigoViagemAssDestinoStr;
                 cout << "Digite o codigo da viagem associada ao destino que deseja criar: " << endl;
@@ -315,7 +298,7 @@ int main() {
                     }
                 }
                 break;
-            }
+            }*/
             case 11: { // Adicionar Hospedagem
                 // cout << "Funcionalidade de adicionar hospedagem ainda nao implementada.\n";
                 string destino;
